@@ -1,8 +1,13 @@
-# executemany() method
+# executemay() method
+
 import sqlite3
 
-# insert multiple records using a tuple
-cities = [
+with sqlite3.connect("new.db") as connection:
+    c = connection.cursor()
+
+    # insert multiple records using a tuple # (you can copy and paste the values)
+
+    cities = [
     ('Boston', 'MA', 600000),
     ('Los Angeles', 'CA', 38000000),
     ('Houston', 'TX', 2100000),
@@ -15,15 +20,11 @@ cities = [
     ('Indianapolis', 'IN', 800000),
     ('Austin', 'TX', 800000),
     ('Detroit', 'MI', 700000)
-]
+    ]
+    # insert data into table
+    c.executemany('INSERT INTO population VALUES(?,?,?)', cities)
 
-with sqlite3.connect("new.db") as connection:
-
-    c = connection.cursor()
-
-    c.executemany('INSERT INTO population VALUES(?, ?, ?)', cities)
-
-    c.execute("SELECT * FROM population WHERE population > 100000")
+    c.execute("SELECT * FROM population WHERE population > 1000000")
 
     rows = c.fetchall()
 

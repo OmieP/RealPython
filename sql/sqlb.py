@@ -1,24 +1,24 @@
 # INSERT Command with Error Handler
 
-# import the sqlite3 library
+# import the SQL library
 import sqlite3
 
-# create the connection object
+# create the connection
 conn = sqlite3.connect("new.db")
 
-# get a cursor object used to execute SQL commands
+# get a cursor object to execute SQL statements
 cursor = conn.cursor()
 
 try:
     # insert data
-    cursor.execute("INSERT INTO population VALUES('New York City', 'NY', 8200000)")
-    cursor.execute("INSERT INTO population VALUES('San Fransisco','CA',800000)")
+    cursor.execute("INSERT INTO populations VALUES('New York City', \
+        'NY', 8200000)")
+    cursor.execute("INSERT INTO populations VALUES('San Franciso',  \
+        'CA', 800000)")
 
     # commit the changes
     conn.commit()
-
 except sqlite3.OperationalError:
-    print "Oops! Something went wrong. Try again..."
-
-# close the database connection
+    print "Oops! Something went wrong! Try again..."
+# Close the object
 conn.close()
